@@ -1,38 +1,29 @@
 "dein Scripts-----------------------------
 if &compatible
-  set nocompatible               " Be iMproved
+    set nocompatible               " Be iMproved
 endif
 
 " Required:
-set runtimepath+=/home/ioct/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/lds/.local/share/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/home/ioct/.cache/dein')
-  call dein#begin('/home/ioct/.cache/dein')
+if dein#load_state('/home/lds/.local/share/dein')
+    call dein#begin('/home/lds/.local/share/dein')
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/ioct/.cache/dein/repos/github.com/Shougo/dein.vim')
+    " Let dein manage dein
+    " Required:
+    call dein#add('/home/lds/.local/share/dein/repos/github.com/Shougo/dein.vim')
+    call dein#add('rafi/awesome-vim-colorschemes')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('zchee/deoplete-clang')
+    " Add or remove your plugins here like this:
+    "call dein#add('Shougo/neosnippet.vim')
+    "call dein#add('Shougo/neosnippet-snippets')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-  call dein#add('mhartington/nvim-typescript')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('zchee/deoplete-clang')
-  call dein#add('rafi/awesome-vim-colorschemes')
-  call dein#add('scrooloose/nerdtree')
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
+    " Required:
+    call dein#end()
+    call dein#save_state()
 endif
 
 " Required:
@@ -41,14 +32,15 @@ syntax enable
 
 " If you want to install not installed plugins on startup.
 if dein#check_install()
-  call dein#install()
+    call dein#install()
 endif
 
 "End dein Scripts-------------------------
 
 if (has("termguicolors"))
- set termguicolors
+    set termguicolors
 endif
+
 
 " Theme
 
@@ -58,9 +50,11 @@ syntax enable
 
 set nu
 
+
 " tab settings
 set softtabstop=0 noexpandtab
 set shiftwidth=4 smarttab
+
 
 " NERDTree configuration
 
@@ -74,7 +68,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
-" Enable deoplete at startup
+" Setup clang completion
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/x86_64-linux-gnu/libclang.so' 
+let g:deoplete#sources#clang#clangheaders = '/usr/include/clang'
+let g:deoplete#sources#clang#std = {'c': 'c11', 'cpp': 'c++11'}
 
 call deoplete#enable()
-
